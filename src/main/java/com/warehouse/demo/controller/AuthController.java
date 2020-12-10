@@ -20,6 +20,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,10 +30,14 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.Collections;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
+
+    private static final String TOKEN = "token";
+
     @Autowired
     AuthenticationManager authenticationManager;
 
@@ -60,8 +65,13 @@ public class AuthController {
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        String jwt = tokenProvider.generateToken(authentication);
-        return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
+        String jwt = tokenProvider.generateToken(authentication);/*
+        Map<String,String> header = new MultiValueMap<>();
+        return new ResponseEntity<>(Collections.singletonMap("token",jwt),HttpStatus.OK);*/
+        /*new JwtAuthenticationResponse(jwt)*/
+        return ResponseEntity.ok()
+                .header(TOKEN,jwt)
+                .build();
     }
 
     @PostMapping("/signup")
