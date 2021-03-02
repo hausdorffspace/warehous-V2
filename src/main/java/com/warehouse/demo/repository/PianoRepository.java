@@ -22,4 +22,9 @@ public interface PianoRepository extends JpaRepository<Piano, Long> {
 
     @Query(value = "SELECT * FROM piano AS p WHERE p.sku=:sku",nativeQuery = true)
     Optional<Piano> findPianoBySku(@Param("sku") String sku);
+
+    @Transactional
+    @Modifying(clearAutomatically = true)
+    @Query(value = "UPDATE piano AS p SET p.avaliable=TRUE WHERE p.sku=:sku",nativeQuery = true)
+    Integer returnPianoToTheWarehouseWithSku(@Param("sku") String sku);
 }

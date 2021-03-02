@@ -1,4 +1,4 @@
-package com.warehouse.demo.payload.request;
+package com.warehouse.demo.payload.response;
 
 import java.io.Serializable;
 
@@ -14,17 +14,17 @@ public class PianoResponse implements Serializable {
 
     private String userName;
 
-    private Integer privce;
+    private Integer price;
 
     private String SKU;
 
-    public PianoResponse(Long id, String model, String producer, Boolean avaliable, String userName, Integer privce, String SKU) {
+    public PianoResponse(Long id, String model, String producer, Boolean avaliable, String userName, Integer price, String SKU) {
         this.id = id;
         this.model = model;
         this.producer = producer;
         this.avaliable = avaliable;
         this.userName = userName;
-        this.privce = privce;
+        this.price = price;
         this.SKU = SKU;
     }
 
@@ -33,22 +33,6 @@ public class PianoResponse implements Serializable {
 
     public Long getId() {
         return id;
-    }
-
-    public Integer getPrivce() {
-        return privce;
-    }
-
-    public void setPrivce(Integer privce) {
-        this.privce = privce;
-    }
-
-    public String getSKU() {
-        return SKU;
-    }
-
-    public void setSKU(String SKU) {
-        this.SKU = SKU;
     }
 
     public void setId(Long id) {
@@ -85,5 +69,21 @@ public class PianoResponse implements Serializable {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
+
+    public String getSKU() {
+        return SKU;
+    }
+
+    public void setSKU(String SKU) {
+        this.SKU = SKU;
     }
 }
