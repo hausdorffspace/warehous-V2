@@ -6,3 +6,4 @@ INSERT INTO users(created_at,updated_at,email,name,password,username) VALUES("20
 INSERT INTO piano(sku,avaliable,model,price,producer) VALUES("QWERTY",1,"D_274",599999,"STAINWAY_SONS");
 INSERT INTO piano(sku,avaliable,model,price,producer) VALUES("QWERT",1,"S_155",99999,"STAINWAY_SONS");
 INSERT INTO piano(sku,avaliable,model,price,producer) VALUES("QWER",1,"D_274",599999,"STAINWAY_SONS");
+

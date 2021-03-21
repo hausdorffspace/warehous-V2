@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 
 @Entity
@@ -31,6 +32,9 @@ public class Piano implements Serializable {
     private Integer price;
 
     private String SKU;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "reservedPiano")
+    private List<Reservation> reservations;
 
     public Long getId() {
         return id;
