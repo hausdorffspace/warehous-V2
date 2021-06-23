@@ -33,9 +33,6 @@ public class Piano implements Serializable {
 
     private String SKU;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "reservedPiano")
-    private List<Reservation> reservations;
-
     public Long getId() {
         return id;
     }

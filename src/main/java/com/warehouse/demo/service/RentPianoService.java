@@ -44,21 +44,7 @@ public class RentPianoService {
     }
 
     public Optional<Piano> rentPiano(RentPianoRequest rentPianoRequest, String token) {
-        Long userIdFromJWT = jwtTokenProvider.getUserIdFromJWT(token.substring(7));
-        Optional<User> user = userRepository.findById(userIdFromJWT);
-        if (user.isEmpty()){
-            throw new UserNotFoundException();
-        } else {
-            Integer isUpdate = pianoRepository.rentPianoWithSKU(user.get(), rentPianoRequest.getSku(), false);
-            if (isUpdate.equals(1)){
-                Optional<Piano> rentedPiano = pianoRepository.findPianoBySku(rentPianoRequest.getSku());
-                sendAReminderEmailOneDayBeforeReturnThePiano(user.get().getEmail(),rentPianoRequest.getPeriodInDay());
-                sendsEmailAfterTimeExpiresAndSetPianoAvailableToTrue(rentedPiano.get().getSKU(), rentPianoRequest.getPeriodInDay());
-                return rentedPiano;
-            }else {
-                throw new PianoIsRentException(rentPianoRequest.getSku());
-            }
-        }
+       return Optional.empty();
     }
 
 

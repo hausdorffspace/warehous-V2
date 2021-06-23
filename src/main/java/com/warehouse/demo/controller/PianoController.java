@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 @RestController
 public class PianoController {
 
-    private PianoService pianoService;
+    /*private PianoService pianoService;
 
     @Autowired
     public PianoController(PianoService pianoService) {
@@ -48,7 +48,7 @@ public class PianoController {
                     .collect(Collectors.toList());
             return new ResponseEntity<>(response, HttpStatus.OK);
         }
-    }
+    }*/
 
 
     /*//TODO only admin should be allowed to add the piano
@@ -58,25 +58,6 @@ public class PianoController {
         return null;
     }*/
 
-    @PutMapping("/api/rent")
-    ResponseEntity<PianoResponse> rentPiano(@RequestBody @Valid RentPianoRequest rentPianoRequest, @RequestHeader HttpHeaders header){
-        Optional<String> authorization = header.get("Authorization").stream().findFirst();
-        if(authorization.isEmpty()){
-            throw new TokenNotFoundException();
-        } else {
-            String token = authorization.get();
-            Optional<Piano> rentedPiano = pianoService.rentPiano(rentPianoRequest, token);
-            if(rentedPiano.isPresent()){
-                PianoResponse updatedPiano = rentedPiano.stream()
-                        .map(piano -> getObjectMapper().map(piano, PianoResponse.class))
-                        .findFirst()
-                        .get();
-                return new ResponseEntity<>(updatedPiano,HttpStatus.OK);
-            } else {
-                //TODO
-                throw new AppException("Awdawd");
-            }
-        }
-    }
+
 
 }

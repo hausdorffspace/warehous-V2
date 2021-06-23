@@ -2,13 +2,20 @@ package com.warehouse.demo.payload.request;
 
 
 import javax.validation.constraints.Min;
+import java.sql.Date;
 
+
+//TODO validation time
 public class RentPianoRequest {
 
     private String sku;
 
     @Min(10)
     private Long periodInDay;
+
+    private Date startDate;
+
+    private Date expirationDate;
 
     public RentPianoRequest() {
     }
