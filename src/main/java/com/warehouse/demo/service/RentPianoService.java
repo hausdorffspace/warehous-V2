@@ -43,7 +43,39 @@ public class RentPianoService {
         this.javaMailSender = javaMailSender;
     }
 
-    public Optional<Piano> rentPiano(RentPianoRequest rentPianoRequest, String token) {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   /* public Optional<Piano> rentPiano(RentPianoRequest rentPianoRequest, String token) {
        return Optional.empty();
     }
 
@@ -80,7 +112,7 @@ public class RentPianoService {
                 }
                 javaMailSender.send(mimeMessage);
             }
-        }, /*transformDayToSecond(periodInDay-1)*/ 10000L); //calculate the time.
+        }, *//*transformDayToSecond(periodInDay-1)*//* 10000L); //calculate the time.
     }
 
     //TODO
@@ -95,5 +127,5 @@ public class RentPianoService {
             e.printStackTrace();
         }
         return result;
-    }
+    }*/
 }

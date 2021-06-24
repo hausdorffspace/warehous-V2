@@ -18,7 +18,6 @@ import org.springframework.stereotype.Service;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
@@ -52,7 +51,46 @@ public class PianoService {
         return Optional.ofNullable(pianoRepository.findAll());
     }
 
-    public Optional<Piano> rentPiano(RentPianoRequest rentPianoRequest, String token) {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*public Optional<Piano> rentPiano(RentPianoRequest rentPianoRequest, String token) {
         Long userIdFromJWT = jwtTokenProvider.getUserIdFromJWT(token.substring(7));
         Optional<User> user = userRepository.findById(userIdFromJWT);
         if (user.isEmpty()){
@@ -71,7 +109,7 @@ public class PianoService {
     }
 
 
-    //TODO
+
     private void sendsEmailAfterTimeExpiresAndSetPianoAvailableToTrue(String sku,Long periodInDay) {
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
@@ -103,7 +141,7 @@ public class PianoService {
                 }
                 javaMailSender.send(mimeMessage);
             }
-        }, /*transformDayToSecond(periodInDay-1)*/ 10000L); //calculate the time.
+        }, *//*transformDayToSecond(periodInDay-1)*//* 10000L); //calculate the time.
     }
 
     //TODO
@@ -118,5 +156,5 @@ public class PianoService {
             e.printStackTrace();
         }
         return result;
-    }
+    }*/
 }

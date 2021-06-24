@@ -7,6 +7,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -25,9 +26,8 @@ public class Piano implements Serializable {
 
     private Boolean avaliable = true;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "userId")
-    private User rentier;
+    @OneToMany(mappedBy = "piano")
+    private Set<Reservation> reservationSet;
 
     private Integer price;
 
@@ -63,14 +63,6 @@ public class Piano implements Serializable {
 
     public void setAvaliable(Boolean avaliable) {
         this.avaliable = avaliable;
-    }
-
-    public User getRentier() {
-        return rentier;
-    }
-
-    public void setRentier(User rentier) {
-        this.rentier = rentier;
     }
 
     public Integer getPrice() {

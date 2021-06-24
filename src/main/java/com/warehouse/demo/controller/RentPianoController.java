@@ -37,7 +37,7 @@ public class RentPianoController {
         return new ModelMapper();
     }
 
-    //TODO autorization filter,
+   /* //TODO autorization filter,
     @PreAuthorize("hasRole('ROLE_USER')")
     @PutMapping("/api/rent")
     ResponseEntity<PianoResponse> rentPiano(@RequestBody @Valid RentPianoRequest rentPianoRequest, @RequestHeader HttpHeaders header) {
@@ -60,5 +60,5 @@ public class RentPianoController {
                 throw new AppException("Awdawd");
             }
         }
-    }
+    }*/
 }
