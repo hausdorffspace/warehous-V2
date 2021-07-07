@@ -3,41 +3,34 @@ package com.warehouse.demo.payload.request;
 
 import javax.validation.constraints.Min;
 import java.sql.Date;
+import java.time.LocalDate;
 
-
-//TODO validation time
 public class RentPianoRequest {
 
     private String sku;
 
-    @Min(10)
-    private Long periodInDay;
+    private LocalDate startDate;
 
-    private Date startDate;
-
-    private Date expirationDate;
+    private LocalDate expirationDate;
 
     public RentPianoRequest() {
     }
 
-    public RentPianoRequest(String sku, Long periodInDay) {
+    public RentPianoRequest(String sku, LocalDate startDate, LocalDate expirationDate) {
         this.sku = sku;
-        this.periodInDay = periodInDay;
-    }
-
-    public Long getPeriodInDay() {
-        return periodInDay;
-    }
-
-    public void setPeriodInDay(Long periodInDay) {
-        this.periodInDay = periodInDay;
+        this.startDate = startDate;
+        this.expirationDate = expirationDate;
     }
 
     public String getSku() {
         return sku;
     }
 
-    public void setSku(String sku) {
-        this.sku = sku;
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public LocalDate getExpirationDate() {
+        return expirationDate;
     }
 }

@@ -7,5 +7,7 @@ INSERT INTO piano(sku,avaliable,model,price,producer) VALUES("QWERTY",1,"D_274",
 INSERT INTO piano(sku,avaliable,model,price,producer) VALUES("QWERT",1,"S_155",99999,"STAINWAY_SONS");
 INSERT INTO piano(sku,avaliable,model,price,producer) VALUES("QWER",1,"D_274",599999,"STAINWAY_SONS");
 
-INSERT INTO reservation(start_reservation_date,end_reservation_date,piano_id,user_id) VALUE ("2020-12-08","2021-12-08",1,1);
+INSERT INTO reservation(start_reservation_date,end_reservation_date,piano_id,user_id) VALUE ("2022-12-08","2023-12-08",1,1);
+INSERT INTO reservation(start_reservation_date,end_reservation_date,piano_id,user_id) VALUE ("2067-12-08","2088-12-08",1,1);
+INSERT INTO reservation(start_reservation_date,end_reservation_date,piano_id,user_id) VALUE ("2099-12-08","2100-12-08",2,1);
 

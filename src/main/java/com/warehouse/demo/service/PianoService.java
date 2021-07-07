@@ -17,13 +17,12 @@ import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import javax.swing.text.html.Option;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.List;
-import java.util.Optional;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.net.http.HttpHeaders;
+import java.util.*;
 
 @Service
 public class PianoService {
@@ -51,12 +50,13 @@ public class PianoService {
         return Optional.ofNullable(pianoRepository.findAll());
     }
 
-
-
-
-
-
-
+    public List<Piano> findAllAvliablePiano() {
+        if (pianoRepository.findAllAvaliablePiano() == null){
+            return Collections.emptyList();
+        } else {
+            return pianoRepository.findAllAvaliablePiano();
+        }
+    }
 
 
 

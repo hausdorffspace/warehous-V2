@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -27,4 +28,7 @@ public interface PianoRepository extends JpaRepository<Piano, Long> {
     @Modifying(clearAutomatically = true)
     @Query(value = "UPDATE piano AS p SET p.avaliable=TRUE WHERE p.sku=:sku",nativeQuery = true)
     Integer returnPianoToTheWarehouseWithSku(@Param("sku") String sku);
+
+    @Query(value = "SELECT * FROM piano AS p WHERE p.avaliable = 1" , nativeQuery = true)
+    List<Piano> findAllAvaliablePiano();
 }

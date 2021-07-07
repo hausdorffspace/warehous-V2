@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 @RestController
 public class PianoController {
 
-    /*private PianoService pianoService;
+    private PianoService pianoService;
 
     @Autowired
     public PianoController(PianoService pianoService) {
@@ -48,7 +48,15 @@ public class PianoController {
                     .collect(Collectors.toList());
             return new ResponseEntity<>(response, HttpStatus.OK);
         }
-    }*/
+    }
+
+    @GetMapping("/api/pianos/available")
+    ResponseEntity<List<PianoResponse>> getAllAvailablePiano() {
+        return new ResponseEntity<>(pianoService.findAllAvliablePiano().stream()
+                .map(p->getObjectMapper().map(p,PianoResponse.class))
+                .collect(Collectors.toList()),HttpStatus.OK
+        );
+    }
 
 
     /*//TODO only admin should be allowed to add the piano
@@ -56,8 +64,8 @@ public class PianoController {
     ResponseEntity<?> addPiano(@RequestBody){
 
         return null;
-    }*/
-
+    }
+*/
 
 
 }

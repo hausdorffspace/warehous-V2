@@ -6,6 +6,7 @@ import com.warehouse.demo.model.Piano;
 import com.warehouse.demo.payload.request.RentPianoRequest;
 import com.warehouse.demo.payload.response.PianoResponse;
 import com.warehouse.demo.service.PianoService;
+import com.warehouse.demo.service.RentPianoService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -20,45 +21,31 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 public class RentPianoController {
 
     private PianoService pianoService;
 
+    private RentPianoService rentPianoService;
+
     @Autowired
-    public RentPianoController(PianoService pianoService) {
+    public RentPianoController(PianoService pianoService,RentPianoService rentPianoService) {
         this.pianoService = pianoService;
-    }
+        this.rentPianoService = rentPianoService;    }
 
     @Bean
     public ModelMapper getObjectMapper() {
         return new ModelMapper();
     }
 
-   /* //TODO autorization filter,
+    //TODO autorization filter,
     @PreAuthorize("hasRole('ROLE_USER')")
     @PutMapping("/api/rent")
     ResponseEntity<PianoResponse> rentPiano(@RequestBody @Valid RentPianoRequest rentPianoRequest, @RequestHeader HttpHeaders header) {
-        Optional<String> authorization = header.get("Authorization").stream().findFirst();
-        //Just wanna see what is inside, delete then
-        header.get("Authorization").forEach(System.out::println);
-        if (authorization.isEmpty()) {
-            throw new TokenNotFoundException();
-        } else {
-            String token = authorization.get();
-            Optional<Piano> rentedPiano = pianoService.rentPiano(rentPianoRequest, token);
-            if (rentedPiano.isPresent()) {
-                PianoResponse updatedPiano = rentedPiano.stream()
-                        .map(piano -> getObjectMapper().map(piano, PianoResponse.class))
-                        .findFirst()
-                        .get();
-                return new ResponseEntity<>(updatedPiano, HttpStatus.OK);
-            } else {
-                //TODO
-                throw new AppException("Awdawd");
-            }
-        }
-    }*/
+        return new ResponseEntity<>(getObjectMapper().map(rentPianoService.rentPiano(rentPianoRequest,header),PianoResponse.class),HttpStatus.OK);
+    }
 }

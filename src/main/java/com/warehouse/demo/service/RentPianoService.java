@@ -1,27 +1,21 @@
 package com.warehouse.demo.service;
 
-import com.warehouse.demo.exception.PianoIsRentException;
-import com.warehouse.demo.exception.UserNotFoundException;
 import com.warehouse.demo.model.Piano;
 import com.warehouse.demo.model.User;
 import com.warehouse.demo.payload.request.RentPianoRequest;
 import com.warehouse.demo.repository.PianoRepository;
 import com.warehouse.demo.repository.UserRepository;
 import com.warehouse.demo.security.JwtTokenProvider;
+import com.warehouse.demo.util.ReadUserFromJWT;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpHeaders;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.stereotype.Service;
 
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Optional;
-import java.util.Timer;
-import java.util.TimerTask;
 
+@Service
 public class RentPianoService {
 
     private PianoRepository pianoRepository;
@@ -43,6 +37,18 @@ public class RentPianoService {
         this.javaMailSender = javaMailSender;
     }
 
+    @Bean
+    private ReadUserFromJWT getInstanceOfReadUserFromJWT() {
+        return new ReadUserFromJWT(jwtTokenProvider, userRepository);
+    }
+
+    public Piano rentPiano(RentPianoRequest rentPianoRequest, HttpHeaders header) {
+        User userFromJWT = getInstanceOfReadUserFromJWT().getUser(header);
+        Integer integer = pianoRepository.rentPianoWithSKU(userFromJWT, rentPianoRequest.getSku(), false);
+
+
+        return new Piano();
+    }
 
 
 
