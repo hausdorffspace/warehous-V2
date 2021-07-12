@@ -54,7 +54,7 @@ public class ReservationService {
         } else {
             throw new CannotReservePianoInThisDurationException("Cannot reserve piano");
         }
-        return new Piano();
+        return pianoRepository.findPianoBySku(rentPianoRequest.getSku()).get();
     }
 
     private boolean isAvaliable(List<Reservation> reservations, RentPianoRequest rentPianoRequest) {

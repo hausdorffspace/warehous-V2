@@ -46,15 +46,21 @@ public class PianoService {
         this.javaMailSender = javaMailSender;
     }
 
-    public Optional<List<Piano>> findAll(){
-        return Optional.ofNullable(pianoRepository.findAll());
+    public List<Piano> findAll() {
+        List<Piano> all = pianoRepository.findAll();
+        if (all == null){
+            return Collections.emptyList();
+        } else {
+            return all;
+        }
     }
 
     public List<Piano> findAllAvliablePiano() {
-        if (pianoRepository.findAllAvaliablePiano() == null){
+        List<Piano> allAvailablePiano = pianoRepository.findAllAvailablePiano();
+        if (allAvailablePiano == null) {
             return Collections.emptyList();
         } else {
-            return pianoRepository.findAllAvaliablePiano();
+            return allAvailablePiano;
         }
     }
 

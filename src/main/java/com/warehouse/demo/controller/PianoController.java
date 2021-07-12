@@ -31,20 +31,19 @@ public class PianoController {
     }
 
     @Bean
-    private ModelMapper getObjectMapper(){
+    private ModelMapper getObjectMapper() {
         return new ModelMapper();
     }
 
     //TODO tests
     @GetMapping("/api/pianos")
     ResponseEntity<List<PianoResponse>> getAllPiano() {
-
-        Optional<List<Piano>> pianos = pianoService.findAll();
+        List<Piano> pianos = pianoService.findAll();
         if (pianos.isEmpty()) {
             throw new NoPianoInDatabaseException();
         } else {
-            List<PianoResponse> response = pianos.get().stream()
-                    .map(piano -> getObjectMapper().map(piano,PianoResponse.class))
+            List<PianoResponse> response = pianos.stream()
+                    .map(piano -> getObjectMapper().map(piano, PianoResponse.class))
                     .collect(Collectors.toList());
             return new ResponseEntity<>(response, HttpStatus.OK);
         }
@@ -53,8 +52,8 @@ public class PianoController {
     @GetMapping("/api/pianos/available")
     ResponseEntity<List<PianoResponse>> getAllAvailablePiano() {
         return new ResponseEntity<>(pianoService.findAllAvliablePiano().stream()
-                .map(p->getObjectMapper().map(p,PianoResponse.class))
-                .collect(Collectors.toList()),HttpStatus.OK
+                .map(p -> getObjectMapper().map(p, PianoResponse.class))
+                .collect(Collectors.toList()), HttpStatus.OK
         );
     }
 

@@ -43,9 +43,9 @@ public class RentPianoController {
     }
 
     //TODO autorization filter,
-    @PreAuthorize("hasRole('ROLE_USER')")
+    /*@PreAuthorize("hasRole('ROLE_USER')")
     @PutMapping("/api/rent")
     ResponseEntity<PianoResponse> rentPiano(@RequestBody @Valid RentPianoRequest rentPianoRequest, @RequestHeader HttpHeaders header) {
         return new ResponseEntity<>(getObjectMapper().map(rentPianoService.rentPiano(rentPianoRequest,header),PianoResponse.class),HttpStatus.OK);
-    }
+    }*/
 }

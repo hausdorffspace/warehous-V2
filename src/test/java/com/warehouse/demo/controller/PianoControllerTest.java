@@ -40,7 +40,7 @@ class PianoControllerTest {
 
         List<Piano> pianosFromDatabase = new ArrayList<>();
         pianosFromDatabase.add(new Piano());
-        Optional<List<Piano>> optionalPianos = Optional.ofNullable(pianosFromDatabase);
+        List<Piano> optionalPianos = pianosFromDatabase;
         when(pianoService.findAll())
                 .thenReturn(optionalPianos);
 

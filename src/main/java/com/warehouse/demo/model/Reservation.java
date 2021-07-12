@@ -2,6 +2,7 @@ package com.warehouse.demo.model;
 
 
 import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -35,6 +36,17 @@ public class Reservation {
                 ", piano=" + piano +
                 ", user=" + user +
                 '}';
+    }
+
+    public Reservation() {
+    }
+
+    public Reservation(Long id, LocalDate startReservationDate, LocalDate endReservationDate, Piano piano, User user) {
+        this.id = id;
+        this.startReservationDate = startReservationDate;
+        this.endReservationDate = endReservationDate;
+        this.piano = piano;
+        this.user = user;
     }
 
     public Long getId() {

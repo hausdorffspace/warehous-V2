@@ -47,7 +47,7 @@ class PianoServiceTest {
         doReturn(pianosFromDatabase).when(pianoRepository).findAll();
 
         //Execute the service call
-        List<Piano> returnedPianos = pianoService.findAll().get();
+        List<Piano> returnedPianos = pianoService.findAll();
 
         //assert the response
         Assertions.assertNotNull(returnedPianos, "returned piano should not be null");

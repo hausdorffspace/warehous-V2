@@ -24,7 +24,7 @@ public class Piano implements Serializable {
     @Enumerated(EnumType.STRING)
     private Producer producer;
 
-    private Boolean avaliable = true;
+    private Boolean availableNow;
 
     @OneToMany(mappedBy = "piano")
     private Set<Reservation> reservationSet;
@@ -58,11 +58,11 @@ public class Piano implements Serializable {
     }
 
     public Boolean getAvaliable() {
-        return avaliable;
+        return availableNow;
     }
 
-    public void setAvaliable(Boolean avaliable) {
-        this.avaliable = avaliable;
+    public void setAvaliable(Boolean availableNow) {
+        this.availableNow = availableNow;
     }
 
     public Integer getPrice() {
