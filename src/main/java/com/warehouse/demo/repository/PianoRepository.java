@@ -39,4 +39,9 @@ public interface PianoRepository extends JpaRepository<Piano, Long> {
     @Query(value = "UPDATE piano AS p SET p.available_now=FALSE WHERE p.sku=:sku", nativeQuery = true)
     Integer setAvailablePianoForFalse(@Param("sku") String sku);
 
+    @Transactional
+    @Modifying(clearAutomatically = true)
+    @Query(value = "UPDATE piano AS p SET p.available_now=TRUE WHERE p.sku=:sku", nativeQuery = true)
+    Integer setAvailablePianoForTrue(@Param("sky") String sku);
+
 }
