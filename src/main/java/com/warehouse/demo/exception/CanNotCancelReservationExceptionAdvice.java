@@ -9,15 +9,14 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.time.ZonedDateTime;
 
 @RestControllerAdvice
-public class CannotReservePianoInThisDurationExceptionAdvice {
-
-    @ExceptionHandler(CannotReservePianoInThisDurationException.class)
-    public ResponseEntity<?> tokenNotFoundException(CannotReservePianoInThisDurationException e){
+public class CanNotCancelReservationExceptionAdvice {
+    @ExceptionHandler(CanNotCancelReservationException.class)
+    public ResponseEntity<?> pianoIsRentException(CanNotCancelReservationException ex){
         ResponseBodyException response = new ResponseBodyException(
-                e.getMessage(),
-                e,
-                HttpStatus.BAD_REQUEST,
+                ex.getMessage(),
+                ex,
+                HttpStatus.NOT_FOUND,
                 ZonedDateTime.now());
-        return new ResponseEntity<>(response,HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(response,HttpStatus.NOT_FOUND);
     }
 }

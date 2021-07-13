@@ -1,8 +1,8 @@
 package com.warehouse.demo.service;
 
 
+import com.warehouse.demo.exception.CanNotCancelReservationException;
 import com.warehouse.demo.exception.CannotReservePianoInThisDurationException;
-import com.warehouse.demo.model.Piano;
 import com.warehouse.demo.model.Reservation;
 import com.warehouse.demo.payload.request.RentPianoRequest;
 import com.warehouse.demo.repository.PianoRepository;
@@ -11,11 +11,12 @@ import com.warehouse.demo.repository.UserRepository;
 import com.warehouse.demo.security.JwtTokenProvider;
 import com.warehouse.demo.util.ReadUserFromJWT;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.chrono.ChronoLocalDate;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -38,6 +39,7 @@ public class ReservationService {
         this.pianoRepository = pianoRepository;
     }
 
+    @Bean
     private ReadUserFromJWT getReadUserFromJWT() {
         return new ReadUserFromJWT(jwtTokenProvider, userRepository);
     }
@@ -55,9 +57,38 @@ public class ReservationService {
         }
     }
 
+    public Reservation deleteReservation(Long reservarionId, HttpHeaders headers){
+        if (reservarionRepository.getOne(reservarionId).getUser().getId()==getReadUserFromJWT().getUser(headers).getId()){
+            Reservation deletedReservation = reservarionRepository.getOne(reservarionId);
+            reservarionRepository.deleteById(reservarionId);
+            return deletedReservation;
+        } else {
+            throw new CanNotCancelReservationException("Can't cancel reservation: id=" + reservarionId + " check request" );
+        }
+    }
+
+    public List<Reservation> getAllReservation(){
+        List<Reservation> all = reservarionRepository.findAll();
+        if (all == null){
+            return Collections.emptyList();
+        } else {
+            return all;
+        }
+    }
+
+    public List<Reservation> getAllUserReservations(HttpHeaders headers){
+        List<Reservation> allUserReservation = reservarionRepository.getAllUserReservation(getReadUserFromJWT().getUser(headers).getId());
+        if (allUserReservation == null){
+            return Collections.emptyList();
+        } else {
+            return allUserReservation;
+        }
+    }
+
     private Reservation rentPiano(RentPianoRequest rentPianoRequest, HttpHeaders header){
+        pianoRepository.setAvailablePianoForFalse(rentPianoRequest.getSku());
         return reservarionRepository.save(Reservation.builder()
-                .startReservationDate(rentPianoRequest.getStartDate())
+                .startReservationDate(LocalDate.now())
                 .endReservationDate(rentPianoRequest.getExpirationDate())
                 .piano(pianoRepository.findPianoBySku(rentPianoRequest.getSku()).get())
                 .user(getReadUserFromJWT().getUser(header))
