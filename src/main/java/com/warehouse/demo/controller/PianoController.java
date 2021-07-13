@@ -1,12 +1,9 @@
 package com.warehouse.demo.controller;
 
 
-import com.warehouse.demo.exception.AppException;
 import com.warehouse.demo.exception.NoPianoInDatabaseException;
-import com.warehouse.demo.exception.TokenNotFoundException;
 import com.warehouse.demo.model.Piano;
 import com.warehouse.demo.payload.response.PianoResponse;
-import com.warehouse.demo.payload.request.RentPianoRequest;
 import com.warehouse.demo.service.PianoService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 

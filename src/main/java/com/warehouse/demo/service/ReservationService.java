@@ -15,6 +15,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.chrono.ChronoLocalDate;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -41,20 +42,37 @@ public class ReservationService {
         return new ReadUserFromJWT(jwtTokenProvider, userRepository);
     }
 
-    public Piano reservePiano(RentPianoRequest rentPianoRequest, HttpHeaders header) {
+    public Reservation reservePiano(RentPianoRequest rentPianoRequest, HttpHeaders header) {
         List<Reservation> reservations = reservarionRepository.reservationListOfPianoWithSKU(rentPianoRequest.getSku());
         if (isAvaliable(reservations, rentPianoRequest)) {
-            reservarionRepository.save(Reservation.builder()
-                    .startReservationDate(rentPianoRequest.getStartDate())
-                    .endReservationDate(rentPianoRequest.getExpirationDate())
-                    .piano(pianoRepository.findPianoBySku(rentPianoRequest.getSku()).get())
-                    .user(getReadUserFromJWT().getUser(header))
-                    .build()
-            );
+            if(rentPianoRequest.getStartDate().compareTo(LocalDate.now())==0){
+                return rentPiano(rentPianoRequest,header);
+            } else {
+                return reservePianoInFuture(rentPianoRequest,header);
+            }
         } else {
             throw new CannotReservePianoInThisDurationException("Cannot reserve piano");
         }
-        return pianoRepository.findPianoBySku(rentPianoRequest.getSku()).get();
+    }
+
+    private Reservation rentPiano(RentPianoRequest rentPianoRequest, HttpHeaders header){
+        return reservarionRepository.save(Reservation.builder()
+                .startReservationDate(rentPianoRequest.getStartDate())
+                .endReservationDate(rentPianoRequest.getExpirationDate())
+                .piano(pianoRepository.findPianoBySku(rentPianoRequest.getSku()).get())
+                .user(getReadUserFromJWT().getUser(header))
+                .build()
+        );
+    }
+
+    private Reservation reservePianoInFuture(RentPianoRequest rentPianoRequest, HttpHeaders header){
+        return reservarionRepository.save(Reservation.builder()
+                .startReservationDate(rentPianoRequest.getStartDate())
+                .endReservationDate(rentPianoRequest.getExpirationDate())
+                .piano(pianoRepository.findPianoBySku(rentPianoRequest.getSku()).get())
+                .user(getReadUserFromJWT().getUser(header))
+                .build()
+        );
     }
 
     private boolean isAvaliable(List<Reservation> reservations, RentPianoRequest rentPianoRequest) {

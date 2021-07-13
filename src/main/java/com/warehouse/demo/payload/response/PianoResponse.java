@@ -10,7 +10,7 @@ public class PianoResponse implements Serializable {
 
     private String producer;
 
-    private Boolean avaliable;
+    private Boolean available;
 
     private String userName;
 
@@ -22,7 +22,7 @@ public class PianoResponse implements Serializable {
         this.id = id;
         this.model = model;
         this.producer = producer;
-        this.avaliable = avaliable;
+        this.available = avaliable;
         this.userName = userName;
         this.price = price;
         this.SKU = SKU;
@@ -55,12 +55,12 @@ public class PianoResponse implements Serializable {
         this.producer = producer;
     }
 
-    public Boolean getAvaliable() {
-        return avaliable;
+    public Boolean getAvailable() {
+        return available;
     }
 
-    public void setAvaliable(Boolean avaliable) {
-        this.avaliable = avaliable;
+    public void setAvailable(Boolean available) {
+        this.available = available;
     }
 
     public String getUserName() {
