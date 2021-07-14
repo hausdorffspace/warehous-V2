@@ -2,6 +2,7 @@ INSERT INTO roles(name) VALUES('ROLE_USER');
 INSERT INTO roles(name) VALUES('ROLE_ADMIN');
 
 INSERT INTO users(created_at,updated_at,email,name,password,username) VALUES("2020-12-08 14:56:01","2020-12-08 14:56:01","rafal.antas96@gmail.com","Rafal Antas","$2a$10$StuLvpvTsyLxeqZoYIa0G.79b5PNLR46zMrVUw7wQXn2bxPBLrNV2","test");
+INSERT INTO users(created_at,updated_at,email,name,password,username) VALUES("2020-12-08 14:56:01","2020-12-08 14:56:01","test@gmail.com","Emilka","$2a$10$/fF1BgDzB1/tXBI6V4iFueAU0nhBbXB2rKTAeKyWYGoJ4w4XcRxaK","emilka");
 
 INSERT INTO user_roles(user_id,role_id) VALUES(1,1);
 INSERT INTO user_roles(user_id,role_id) VALUES(1,2);

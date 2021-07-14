@@ -4,6 +4,7 @@ package com.warehouse.demo.service;
 import com.warehouse.demo.exception.CanNotCancelReservationException;
 import com.warehouse.demo.exception.CannotReservePianoInThisDurationException;
 import com.warehouse.demo.model.Reservation;
+import com.warehouse.demo.payload.request.DeleteReservationRequest;
 import com.warehouse.demo.payload.request.RentPianoRequest;
 import com.warehouse.demo.repository.PianoRepository;
 import com.warehouse.demo.repository.ReservarionRepository;
@@ -61,13 +62,11 @@ public class ReservationService {
         }
     }
 
-    public Reservation deleteReservation(Long reservarionId, HttpHeaders headers) {
-        if (reservarionRepository.getOne(reservarionId).getUser().getId() == getReadUserFromJWT().getUser(headers).getId()) {
-            Reservation deletedReservation = reservarionRepository.getOne(reservarionId);
-            reservarionRepository.deleteById(reservarionId);
-            return deletedReservation;
+    public void deleteReservation(DeleteReservationRequest deleteReservationRequest, HttpHeaders headers) {
+        if (reservarionRepository.getOne(deleteReservationRequest.getReservationId()).getUser().getId() == getReadUserFromJWT().getUser(headers).getId()) {
+            reservarionRepository.deleteById(deleteReservationRequest.getReservationId());
         } else {
-            throw new CanNotCancelReservationException("Can't cancel reservation: id=" + reservarionId + " check request");
+            throw new CanNotCancelReservationException("Can't cancel reservation: id=" + deleteReservationRequest.getReservationId() + " check request");
         }
     }
 
