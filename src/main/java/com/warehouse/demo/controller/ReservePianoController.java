@@ -56,7 +56,6 @@ public class ReservePianoController {
                 HttpStatus.OK);
     }
 
-    //Maybe change return type... ReservationResponse for nothing?? and return 204
     @DeleteMapping("/api/reservation/delete")
     public ResponseEntity<?> deleteReservation(@RequestBody DeleteReservationRequest deleteReservationRequest, @RequestHeader HttpHeaders headers) {
         reservationService.deleteReservation(deleteReservationRequest, headers);

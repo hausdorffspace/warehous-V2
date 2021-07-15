@@ -3,7 +3,7 @@ package com.warehouse.demo.payload.request;
 import java.io.Serializable;
 
 public class DeleteReservationRequest implements Serializable {
-    public Long reservationId;
+    private Long reservationId;
 
     public DeleteReservationRequest(Long reservationId) {
         this.reservationId = reservationId;

@@ -55,7 +55,7 @@ public class PianoService {
         }
     }
 
-    public List<Piano> findAllAvliablePiano() {
+    public List<Piano> findAllAvailablePiano() {
         List<Piano> allAvailablePiano = pianoRepository.findAllAvailablePiano();
         if (allAvailablePiano == null) {
             return Collections.emptyList();
@@ -63,6 +63,8 @@ public class PianoService {
             return allAvailablePiano;
         }
     }
+
+
 
 
 

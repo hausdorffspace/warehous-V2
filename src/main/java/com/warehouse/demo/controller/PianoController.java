@@ -46,7 +46,7 @@ public class PianoController {
 
     @GetMapping("/api/pianos/available")
     ResponseEntity<List<PianoResponse>> getAllAvailablePiano() {
-        return new ResponseEntity<>(pianoService.findAllAvliablePiano().stream()
+        return new ResponseEntity<>(pianoService.findAllAvailablePiano().stream()
                 .map(p -> getObjectMapper().map(p, PianoResponse.class))
                 .collect(Collectors.toList()), HttpStatus.OK
         );
