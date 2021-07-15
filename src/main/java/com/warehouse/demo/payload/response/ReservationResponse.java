@@ -1,11 +1,18 @@
 package com.warehouse.demo.payload.response;
 
-import com.warehouse.demo.model.Piano;
-import com.warehouse.demo.model.User;
+import com.warehouse.demo.model.*;
+import lombok.Builder;
+import org.hibernate.annotations.NaturalId;
 
+import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Set;
 
+@Builder
 public class ReservationResponse implements Serializable {
 
     private Long id;
@@ -14,58 +21,73 @@ public class ReservationResponse implements Serializable {
 
     private LocalDate endReservationDate;
 
-    private Piano piano;
+    private StainwayModel model;
 
-    private User user;
+    private Producer producer;
+
+    private Integer price;
+
+    private String SKU;
+
+    private String name;
+
+    private String username;
+
+    private String email;
 
     public ReservationResponse() {
     }
 
-    public ReservationResponse(Long id, LocalDate startReservationDate, LocalDate endReservationDate, Piano piano, User user) {
+    public ReservationResponse(Long id, LocalDate startReservationDate, LocalDate endReservationDate, StainwayModel model, Producer producer, Integer price, String SKU, String name, String username, String email) {
         this.id = id;
         this.startReservationDate = startReservationDate;
         this.endReservationDate = endReservationDate;
-        this.piano = piano;
-        this.user = user;
+        this.model = model;
+        this.producer = producer;
+        this.price = price;
+        this.SKU = SKU;
+        this.name = name;
+        this.username = username;
+        this.email = email;
     }
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public LocalDate getStartReservationDate() {
         return startReservationDate;
-    }
-
-    public void setStartReservationDate(LocalDate startReservationDate) {
-        this.startReservationDate = startReservationDate;
     }
 
     public LocalDate getEndReservationDate() {
         return endReservationDate;
     }
 
-    public void setEndReservationDate(LocalDate endReservationDate) {
-        this.endReservationDate = endReservationDate;
+    public StainwayModel getModel() {
+        return model;
     }
 
-    public Piano getPiano() {
-        return piano;
+    public Producer getProducer() {
+        return producer;
     }
 
-    public void setPiano(Piano piano) {
-        this.piano = piano;
+    public Integer getPrice() {
+        return price;
     }
 
-    public User getUser() {
-        return user;
+    public String getSKU() {
+        return SKU;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public String getName() {
+        return name;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getEmail() {
+        return email;
     }
 }
