@@ -10,7 +10,7 @@ import com.warehouse.demo.repository.PianoRepository;
 import com.warehouse.demo.repository.ReservarionRepository;
 import com.warehouse.demo.repository.UserRepository;
 import com.warehouse.demo.security.JwtTokenProvider;
-import com.warehouse.demo.util.ReadUserFromJWT;
+import com.warehouse.demo.util.reader.ReadUserFromJWT;
 import com.warehouse.demo.util.TrueOrFalse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

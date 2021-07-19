@@ -5,6 +5,9 @@ import com.warehouse.demo.repository.ReservarionRepository;
 import com.warehouse.demo.util.ChangePianoAvailableTimeTasker;
 import com.warehouse.demo.util.TimerBox;
 import com.warehouse.demo.util.TrueOrFalse;
+import org.quartz.Job;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,14 +17,15 @@ import java.util.Date;
 import java.util.Timer;
 
 @Service
-public class PianoStatusService {
+public class PianoStatusService{
 
     private PianoRepository pianoRepository;
 
     private TimerBox timerBox;
 
     @Autowired
-    public PianoStatusService(PianoRepository pianoRepository) {
+    public PianoStatusService(PianoRepository pianoRepository, TimerBox timerBox) {
+        this.timerBox = timerBox;
         this.pianoRepository = pianoRepository;
     }
 
@@ -36,4 +40,6 @@ public class PianoStatusService {
     public void cancelTimerTaskThread(Long reservationId) {
         timerBox.shutDownTasker(reservationId);
     }
+
+
 }

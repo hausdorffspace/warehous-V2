@@ -1,4 +1,4 @@
-package com.warehouse.demo.util;
+package com.warehouse.demo.util.reader;
 
 import com.warehouse.demo.exception.TokenNotFoundException;
 import com.warehouse.demo.exception.UserNotFoundException;

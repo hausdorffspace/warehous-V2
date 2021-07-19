@@ -1,15 +1,12 @@
 package com.warehouse.demo.controller;
 
 
-import com.warehouse.demo.model.Piano;
 import com.warehouse.demo.payload.request.DeleteReservationRequest;
 import com.warehouse.demo.payload.request.RentPianoRequest;
 import com.warehouse.demo.payload.response.ReservationResponse;
 import com.warehouse.demo.service.ReservationService;
-import com.warehouse.demo.util.MapReservationToReservationResponse;
-import org.modelmapper.ModelMapper;
+import com.warehouse.demo.util.mapper.MapReservationToReservationResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

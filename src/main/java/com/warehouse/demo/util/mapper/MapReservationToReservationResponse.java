@@ -1,4 +1,4 @@
-package com.warehouse.demo.util;
+package com.warehouse.demo.util.mapper;
 
 import com.warehouse.demo.model.Reservation;
 import com.warehouse.demo.payload.response.ReservationResponse;
