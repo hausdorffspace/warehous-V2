@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @Component
 public class CheckPianoAvailableAtTheEndOfTheDayJob implements Job {
 
-    /*private PianoRepository pianoRepository;
+    private PianoRepository pianoRepository;
 
     private ReservarionRepository reservarionRepository;
 
@@ -26,11 +26,11 @@ public class CheckPianoAvailableAtTheEndOfTheDayJob implements Job {
     public CheckPianoAvailableAtTheEndOfTheDayJob(PianoRepository pianoRepository, ReservarionRepository reservarionRepository) {
         this.pianoRepository = pianoRepository;
         this.reservarionRepository = reservarionRepository;
-    }*/
+    }
 
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-        /*List<Reservation> reservationsThatEndsToday = reservarionRepository.findAll(Example.of(Reservation.builder().endReservationDate(LocalDate.now()).build()));
+        List<Reservation> reservationsThatEndsToday = reservarionRepository.findAll(Example.of(Reservation.builder().endReservationDate(LocalDate.now()).build()));
         if (!reservationsThatEndsToday.isEmpty()) {
             List<Long> reservationsId = reservationsThatEndsToday.stream()
                     .map(reservation -> reservation.getId())
@@ -40,8 +40,7 @@ public class CheckPianoAvailableAtTheEndOfTheDayJob implements Job {
                     .collect(Collectors.toList());
             reservarionRepository.deleteAllReservationThatExpireToday(reservationsId);
             pianoRepository.setAvailablePianoForTrue(pianosId);
-        }*/
-        System.out.println("quartzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
+        }
     }
 
 

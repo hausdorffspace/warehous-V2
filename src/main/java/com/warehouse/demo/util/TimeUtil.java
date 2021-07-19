@@ -1,9 +1,6 @@
 package com.warehouse.demo.util;
 
-import org.quartz.JobBuilder;
-import org.quartz.JobDetail;
-import org.quartz.Trigger;
-import org.quartz.TriggerBuilder;
+import org.quartz.*;
 
 public final class TimeUtil {
 
@@ -21,7 +18,9 @@ public final class TimeUtil {
     public static Trigger buildTrigger(final Class classJob){
         return TriggerBuilder
                 .newTrigger()
-                .withSchedule()
+                .withIdentity(classJob.getSimpleName())
+                .withSchedule(CronScheduleBuilder.dailyAtHourAndMinute(22,19))
+                .startNow()
                 .build();
     }
 }
