@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @Component
 public class CheckPianoAvailableAtTheEndOfTheDayJob implements Job {
 
-    private PianoRepository pianoRepository;
+    /*private PianoRepository pianoRepository;
 
     private ReservarionRepository reservarionRepository;
 
@@ -26,7 +26,7 @@ public class CheckPianoAvailableAtTheEndOfTheDayJob implements Job {
     public CheckPianoAvailableAtTheEndOfTheDayJob(PianoRepository pianoRepository, ReservarionRepository reservarionRepository) {
         this.pianoRepository = pianoRepository;
         this.reservarionRepository = reservarionRepository;
-    }
+    }*/
 
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
