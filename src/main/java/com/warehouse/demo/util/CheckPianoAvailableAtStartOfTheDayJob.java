@@ -37,5 +37,6 @@ public class CheckPianoAvailableAtStartOfTheDayJob implements Job {
                     .collect(Collectors.toList());
             pianoRepository.setAvailablePianoForTrue(pianosId);
         }
+        System.out.println("heheheh");
     }
 }

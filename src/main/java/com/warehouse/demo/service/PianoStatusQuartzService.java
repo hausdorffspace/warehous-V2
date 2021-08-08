@@ -2,6 +2,7 @@ package com.warehouse.demo.service;
 
 
 import com.warehouse.demo.util.TimeUtil;
+import com.warehouse.demo.util.BeforeOrAfterMidnight;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +21,17 @@ public class PianoStatusQuartzService {
         this.scheduler = scheduler;
     }
 
-    public void schedule(final Class jobClass){
+    public void schedule(final Class jobClass, BeforeOrAfterMidnight beforeOrAfterMidnight){
         try {
-            scheduler.scheduleJob(TimeUtil.buildJobDetail(jobClass),TimeUtil.buildTrigger(jobClass));
+            switch (beforeOrAfterMidnight){
+                case AFTER:
+                    scheduler.scheduleJob(TimeUtil.buildJobDetail(jobClass),TimeUtil.buildTrigger(jobClass,8,25));
+                    break;
+                case BEFORE:
+                    scheduler.scheduleJob(TimeUtil.buildJobDetail(jobClass),TimeUtil.buildTrigger(jobClass,8,26));
+                    break;
+            }
+
         } catch (SchedulerException e) {
             e.printStackTrace();
         }

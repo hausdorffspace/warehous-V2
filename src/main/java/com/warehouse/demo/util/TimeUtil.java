@@ -15,12 +15,13 @@ public final class TimeUtil {
     }
 
 
-    public static Trigger buildTrigger(final Class classJob){
+    public static Trigger buildTrigger(final Class classJob, int hour, int minutes){
         return TriggerBuilder
                 .newTrigger()
                 .withIdentity(classJob.getSimpleName())
-                .withSchedule(CronScheduleBuilder.dailyAtHourAndMinute(22,19))
+                .withSchedule(CronScheduleBuilder.dailyAtHourAndMinute(hour,minutes))
                 .startNow()
                 .build();
     }
+
 }

@@ -33,15 +33,13 @@ public class ReservationService {
 
     private PianoRepository pianoRepository;
 
-    private PianoStatusService pianoStatusService;
 
     @Autowired
-    public ReservationService(JwtTokenProvider jwtTokenProvider, UserRepository userRepository, ReservarionRepository reservarionRepository, PianoRepository pianoRepository, PianoStatusService pianoStatusService) {
+    public ReservationService(JwtTokenProvider jwtTokenProvider, UserRepository userRepository, ReservarionRepository reservarionRepository, PianoRepository pianoRepository) {
         this.jwtTokenProvider = jwtTokenProvider;
         this.userRepository = userRepository;
         this.reservarionRepository = reservarionRepository;
         this.pianoRepository = pianoRepository;
-        this.pianoStatusService = pianoStatusService;
     }
 
     @Bean
@@ -65,7 +63,6 @@ public class ReservationService {
     public void deleteReservation(DeleteReservationRequest deleteReservationRequest, HttpHeaders headers) {
         if (reservarionRepository.getOne(deleteReservationRequest.getReservationId()).getUser().getId() == getReadUserFromJWT().getUser(headers).getId()) {
             reservarionRepository.deleteById(deleteReservationRequest.getReservationId());
-            pianoStatusService.cancelTimerTaskThread(deleteReservationRequest.getReservationId());
         } else {
             throw new CanNotCancelReservationException("Can't cancel reservation: id=" + deleteReservationRequest.getReservationId() + " check request");
         }
@@ -98,7 +95,6 @@ public class ReservationService {
                 .build()
         );
         pianoRepository.setAvailablePianoForFalse(rentPianoRequest.getSku());
-        pianoStatusService.setPianoAvailableWithDate(rentPianoRequest.getExpirationDate(), TrueOrFalse.TRUE, rentPianoRequest.getSku(),save.getId());
         return save;
     }
 
@@ -110,8 +106,6 @@ public class ReservationService {
                 .user(getReadUserFromJWT().getUser(header))
                 .build()
         );
-        pianoStatusService.setPianoAvailableWithDate(rentPianoRequest.getStartDate(), TrueOrFalse.FALSE, rentPianoRequest.getSku(),save.getId());
-        pianoStatusService.setPianoAvailableWithDate(rentPianoRequest.getExpirationDate(), TrueOrFalse.TRUE, rentPianoRequest.getSku(),save.getId());
         return save;
     }
 

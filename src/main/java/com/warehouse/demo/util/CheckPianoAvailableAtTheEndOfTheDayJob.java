@@ -41,6 +41,10 @@ public class CheckPianoAvailableAtTheEndOfTheDayJob implements Job {
             reservarionRepository.deleteAllReservationThatExpireToday(reservationsId);
             pianoRepository.setAvailablePianoForTrue(pianosId);
         }
+        System.out.println("its working");
+        System.out.println("its working");
+        System.out.println("its working");
+        System.out.println("its working");
     }
 
 
