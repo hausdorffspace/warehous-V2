@@ -25,10 +25,10 @@ public class PianoStatusQuartzService {
         try {
             switch (beforeOrAfterMidnight){
                 case AFTER:
-                    scheduler.scheduleJob(TimeUtil.buildJobDetail(jobClass),TimeUtil.buildTrigger(jobClass,8,25));
+                    scheduler.scheduleJob(TimeUtil.buildJobDetail(jobClass),TimeUtil.buildTrigger(jobClass,23,58));
                     break;
                 case BEFORE:
-                    scheduler.scheduleJob(TimeUtil.buildJobDetail(jobClass),TimeUtil.buildTrigger(jobClass,8,26));
+                    scheduler.scheduleJob(TimeUtil.buildJobDetail(jobClass),TimeUtil.buildTrigger(jobClass,0,2));
                     break;
             }
 
